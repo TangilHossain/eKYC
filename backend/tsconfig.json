@@ -1,0 +1,24 @@
+{
+  "compilerOptions": {
+    /* === File structure === */
+    "rootDir": "./src",
+    "outDir": "./dist",
+
+    /* === Environment === */
+    "target": "ES2020",
+    "module": "CommonJS",
+    "lib": ["ESNext"],
+    "types": ["node"],
+    "esModuleInterop": true,
+    "moduleResolution": "node",
+
+    /* === Type Checking === */
+    "strict": true,
+    "noImplicitAny": true,
+    "skipLibCheck": true,
+
+    /* === Debugging === */
+    "sourceMap": true
+  },
+  "include": ["src"]
+}
