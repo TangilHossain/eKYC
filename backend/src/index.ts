@@ -3,6 +3,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 import { connectDB } from "./db";
 import { FormData } from "./models/FormData";
+import formRoutes from "./routes/formRoutes";
 
 import axios from "axios";
 import OpenAI from "openai"
@@ -27,6 +28,18 @@ app.use(express.json());
 
 // Optional: handle preflight requests explicitly
 app.options("/api/form", cors()); 
+app.use("/api/forms", formRoutes);
+
+app.get("api/form", async(require,res) => {
+  try {
+    const forms = (await FormData.find());
+    res.status(200).json(forms);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({error: "Failed to reach"});
+  }
+});
+
 
 app.post("/api/form", async (req, res) => {
   try {
@@ -41,7 +54,11 @@ app.post("/api/form", async (req, res) => {
   
     const gptResponse = chatCompletion.choices[0].message?.content;
     console.log(gptResponse)
-    const data = new FormData(userInput, gptResponse);
+    const formDataWithGPT = {
+      ...userInput,
+      gptResponse: gptResponse
+    };
+    const data = new FormData(formDataWithGPT);
     await data.save();
     res.status(201).json({ message: "Form saved" });
   } catch (err) {

@@ -5,7 +5,7 @@ const formSchema = new mongoose.Schema({
   email: String,
   age: String,
   message: String,
-  description: String
+  gptResponse: String
 });
 
 export const FormData = mongoose.model("FormData", formSchema);
