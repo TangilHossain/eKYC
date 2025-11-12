@@ -1,10 +1,13 @@
-import Form from "./form";
+import Form from "./components/Form";
+import Header from "./components/Header";
+import Footer from "./components/Footer"
 
 function App() {
   return (
     <div style={{ padding: "2rem" }}>
-      <h1>React + MongoDB Form</h1>
+      <Header />
       <Form />
+      <Footer />
     </div>
   );
 }
