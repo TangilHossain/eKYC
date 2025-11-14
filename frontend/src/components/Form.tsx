@@ -14,7 +14,7 @@ export default function Form() {
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    const res = await fetch("http://localhost:5001/api/form", {
+    const res = await fetch("http://localhost:5001/api/forms", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(form),
