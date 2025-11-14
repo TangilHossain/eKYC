@@ -1,6 +1,5 @@
-import { Routes, Route, Link } from "react-router-dom";
-import Form from "./components/Form";
-import Admin from "./components/AdminDashboard";
+import { Link } from "react-router-dom";
+import AppRoutes from "./routes/Routes";
 
 function App() {
   return (
@@ -9,18 +8,12 @@ function App() {
         <Link to="/" className="text-blue-600 font-semibold hover:underline">
           Home
         </Link>
-        <button 
-          onClick={() => window.location.href = '/admin'} 
-          className="text-blue-600 font-semibold  hover: border-2 rounded cursor-pointer"
-        >
+        <Link to="/login" className="text-blue-600 font-semibold hover:underline">
           Admin Login
-        </button>
+        </Link>
       </nav>
 
-      <Routes>
-        <Route path="/" element={<Form />} />
-        <Route path="/admin" element={<Admin />} />
-      </Routes>
+      <AppRoutes /> {/* ✅ now using separate route file */}
     </div>
   );
 }
