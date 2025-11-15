@@ -1,13 +1,37 @@
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 function AdminLoginPage() {
   const navigate = useNavigate(); // ✅ define navigate
 
-  const handleLogin = (e: React.FormEvent) => {
-    e.preventDefault(); // ✅ stop page reload
-    // Optional: Add email/password check here
-    navigate("/adminDashboard"); // ✅ navigate to Admin page
-  };
+  const [form, setForm] = useState({
+    email: "",
+    password: "",
+  });
+
+  async function handleLogin(e: React.FormEvent) {
+    e.preventDefault();
+
+    const res = await fetch("http://localhost:5001/api/admin/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(form),
+    });
+
+    const data = await res.json();
+
+    if (res.ok) {
+      alert("Login Successful");
+      navigate("/admin");
+    } else {
+      alert(data.error || "Login Failed");
+    }
+  }
+
+  function handleChange(e: any) {
+    console.log("name:", e.target.name, "value:", e.target.value);
+    setForm({ ...form, [e.target.name]: e.target.value });
+  }
 
   return (
     <div
@@ -39,7 +63,9 @@ function AdminLoginPage() {
               Email:
             </label>
             <input
+              name="email"
               type="email"
+              onChange={handleChange}
               style={{
                 width: "100%",
                 padding: "0.75rem",
@@ -55,7 +81,9 @@ function AdminLoginPage() {
               Password:
             </label>
             <input
+              name="password"
               type="password"
+              onChange={handleChange}
               style={{
                 width: "100%",
                 padding: "0.75rem",

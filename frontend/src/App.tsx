@@ -12,7 +12,6 @@ function App() {
           Admin Login
         </Link>
       </nav>
-
       <AppRoutes /> {/* ✅ now using separate route file */}
     </div>
   );

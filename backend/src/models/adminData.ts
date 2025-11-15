@@ -5,4 +5,4 @@ const adminSchema = new mongoose.Schema({
   password: String
 });
 
-export const FormData = mongoose.model("adminData", adminSchema);
+export const AdminData = mongoose.model("AdminData", adminSchema);
