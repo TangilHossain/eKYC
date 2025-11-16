@@ -2,12 +2,17 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
 function AdminLoginPage() {
-  const navigate = useNavigate(); // ✅ define navigate
+  const navigate = useNavigate();
 
   const [form, setForm] = useState({
     email: "",
     password: "",
   });
+
+  function handleChange(e: any) {
+    console.log("name:", e.target.name, "value:", e.target.value);
+    setForm({ ...form, [e.target.name]: e.target.value });
+  }
 
   async function handleLogin(e: React.FormEvent) {
     e.preventDefault();
@@ -24,13 +29,9 @@ function AdminLoginPage() {
       alert("Login Successful");
       navigate("/admin");
     } else {
+      console.log(data);
       alert(data.error || "Login Failed");
     }
-  }
-
-  function handleChange(e: any) {
-    console.log("name:", e.target.name, "value:", e.target.value);
-    setForm({ ...form, [e.target.name]: e.target.value });
   }
 
   return (
@@ -59,12 +60,11 @@ function AdminLoginPage() {
 
         <form onSubmit={handleLogin}>
           <div style={{ marginBottom: "1rem" }}>
-            <label style={{ display: "block", marginBottom: "0.5rem" }}>
-              Email:
-            </label>
+            <label>Email:</label>
             <input
               name="email"
               type="email"
+              value={form.email}
               onChange={handleChange}
               style={{
                 width: "100%",
@@ -77,12 +77,11 @@ function AdminLoginPage() {
           </div>
 
           <div style={{ marginBottom: "1.5rem" }}>
-            <label style={{ display: "block", marginBottom: "0.5rem" }}>
-              Password:
-            </label>
+            <label>Password:</label>
             <input
               name="password"
               type="password"
+              value={form.password}
               onChange={handleChange}
               style={{
                 width: "100%",
