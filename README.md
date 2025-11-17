@@ -23,17 +23,11 @@ This project implements an eKYC (Electronic Know Your Customer) form system with
 2. **MongoDB** (local or cloud instance)
 3. **RabbitMQ** (local instance required)
 
-### Install RabbitMQ on macOS
+### Install RabbitMQ on docker
 
 ```bash
 # Install via Homebrew
-brew install rabbitmq
-
-# Start RabbitMQ server
-brew services start rabbitmq
-
-# Or run manually
-/opt/homebrew/opt/rabbitmq/sbin/rabbitmq-server
+docker run -it --rm --name rabbitmq -p 5672:5672 -p 15672:15672 rabbitmq:4-management
 ```
 
 RabbitMQ management UI: http://localhost:15672 (guest/guest)

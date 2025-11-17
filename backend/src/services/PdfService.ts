@@ -12,7 +12,7 @@ interface FormData {
 }
 
 class PdfService {
-  private pdfDir = path.join(__dirname, "../../pdfs");
+  private pdfDir = path.join(process.cwd(), "pdfs");
 
   constructor() {
     this.ensurePdfDirectory();

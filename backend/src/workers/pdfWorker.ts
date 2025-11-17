@@ -33,7 +33,6 @@ async function startWorker() {
         email: formData.email || "",
         age: formData.age || "",
         message: formData.message || "",
-        gptResponse: formData.gptResponse || undefined,
       });
 
       console.log(`✅ PDF generated successfully: ${pdfPath}`);
