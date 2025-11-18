@@ -1,12 +1,18 @@
 import dotenv from "dotenv";
-import { MongoClient } from "mongodb";
+import mongoose from "mongoose";
 
 dotenv.config();
 
 const MONGO_URI =
-  process.env.MONGO_URI || "mongodb://admin:qwerty@localhost:27017";
-const client = new MongoClient(MONGO_URI);
+  process.env.MONGO_URI ||
+  "mongodb://admin:qwerty@localhost:27017/ekyc?authSource=admin";
 
-export function connectDB() {
-  client.connect().then(() => console.log("✅ MongoDB connected"));
+export async function connectDB() {
+  try {
+    await mongoose.connect(MONGO_URI);
+    console.log("✅ MongoDB connected");
+  } catch (err) {
+    console.error("❌ MongoDB connection error:", err);
+    throw err;
+  }
 }

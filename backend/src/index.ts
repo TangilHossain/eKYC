@@ -21,7 +21,7 @@ const PORT = process.env.PORT || 5001;
 
 async function startServer() {
   try {
-    connectDB();
+    await connectDB();
     await rabbitMQService.connect();
 
     app.listen(PORT, () => {
