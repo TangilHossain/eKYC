@@ -9,6 +9,7 @@ This project implements an eKYC (Electronic Know Your Customer) form system with
 - ✅ Asynchronous PDF generation via RabbitMQ
 - ✅ Worker-based background processing
 - ✅ Professional PDF reports with Puppeteer
+- ✅ Comprehensive test suite with Vitest
 
 ## Architecture
 
@@ -138,6 +139,57 @@ AdminDashboard → API Endpoint → RabbitMQ Queue → PDF Worker → PDF File
 3. Click the "PDF" button on any form entry
 4. Check the worker terminal for processing logs
 5. Generated PDFs are saved to `backend/pdfs/`
+
+## Running Tests
+
+This project includes comprehensive test suites for both frontend and backend.
+
+### Quick Start
+
+Run all tests with a single command:
+
+```bash
+# From project root
+./run-tests.sh
+
+# Run only frontend tests
+./run-tests.sh frontend
+
+# Run only backend tests
+./run-tests.sh backend
+
+# Generate coverage reports
+./run-tests.sh coverage
+```
+
+### Individual Test Commands
+
+**Frontend:**
+
+```bash
+cd frontend
+npm test              # Run tests
+npm test -- --watch   # Watch mode
+npm run test:ui       # UI mode
+npm run test:coverage # With coverage
+```
+
+**Backend:**
+
+```bash
+cd backend
+npm test              # Run tests
+npm test -- --watch   # Watch mode
+npm run test:ui       # UI mode
+npm run test:coverage # With coverage
+```
+
+### Test Coverage
+
+- **Frontend**: Component tests, user interaction tests, API mocking
+- **Backend**: API endpoint tests, database operations, service mocking
+
+For detailed testing documentation, see [TESTING.md](./TESTING.md).
 
 ## Creating a Test Admin
 
