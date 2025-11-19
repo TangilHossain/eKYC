@@ -9,7 +9,7 @@ function AdminLoginPage() {
     password: "",
   });
 
-  function handleChange(e: any) {
+  function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     console.log("name:", e.target.name, "value:", e.target.value);
     setForm({ ...form, [e.target.name]: e.target.value });
   }

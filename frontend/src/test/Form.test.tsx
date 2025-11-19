@@ -1,10 +1,11 @@
-import { describe, it, expect, vi } from "vitest";
-import { render, screen, fireEvent, waitFor } from "@testing-library/react";
+import { describe, it, expect, vi, beforeEach } from "vitest";
+import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import Form from "../components/Form";
 
 // Mock fetch globally
-global.fetch = vi.fn();
+const mockFetch = vi.fn();
+globalThis.fetch = mockFetch as never;
 
 describe("Form Component", () => {
   beforeEach(() => {
@@ -45,9 +46,9 @@ describe("Form Component", () => {
 
   it("submits form successfully", async () => {
     const user = userEvent.setup();
-    const mockAlert = vi.spyOn(window, "alert").mockImplementation(() => {});
-
-    (global.fetch as any).mockResolvedValueOnce({
+    const mockAlert = vi.spyOn(globalThis, 'alert').mockImplementation(() => {});
+    
+    mockFetch.mockResolvedValueOnce({
       ok: true,
       json: async () => ({ message: "Form saved successfully!" }),
     });
@@ -63,11 +64,11 @@ describe("Form Component", () => {
     await user.click(submitButton);
 
     await waitFor(() => {
-      expect(global.fetch).toHaveBeenCalledWith(
-        "http://localhost:5001/api/forms",
+      expect(globalThis.fetch).toHaveBeenCalledWith(
+        'http://localhost:5001/api/forms',
         expect.objectContaining({
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
         })
       );
     });
@@ -79,21 +80,21 @@ describe("Form Component", () => {
     mockAlert.mockRestore();
   });
 
-  it("handles form submission error", async () => {
+  it('handles form submission error', async () => {
     const user = userEvent.setup();
-
-    (global.fetch as any).mockResolvedValueOnce({
+    
+    mockFetch.mockResolvedValueOnce({
       ok: false,
       status: 500,
     });
 
     render(<Form />);
 
-    await user.type(screen.getByPlaceholderText("Name"), "John Doe");
-    await user.click(screen.getByRole("button", { name: /submit/i }));
+    await user.type(screen.getByPlaceholderText('Name'), 'John Doe');
+    await user.click(screen.getByRole('button', { name: /submit/i }));
 
     await waitFor(() => {
-      expect(global.fetch).toHaveBeenCalled();
+      expect(globalThis.fetch).toHaveBeenCalled();
     });
   });
 });

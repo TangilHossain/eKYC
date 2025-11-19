@@ -4,7 +4,7 @@
  * This file demonstrates patterns for adding additional tests
  */
 
-import { describe, it, expect, vi } from "vitest";
+import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 
 // ============================================
 // EXAMPLE 1: Testing Admin Dashboard Component
@@ -313,7 +313,7 @@ describe("Example: Mocking", () => {
       json: async () => ({ data: "test" }),
     });
 
-    global.fetch = mockFetch as any;
+    globalThis.fetch = mockFetch as never;
 
     // Your test code here
     expect(mockFetch).toBeDefined();
@@ -339,8 +339,6 @@ describe("Example: Cleanup", () => {
 
   it("does something", () => {
     localStorage.setItem("key", "value");
-    expect(localStorage.getItem("key")).toBe("value");
+    expect(localStorage.getItem('key')).toBe('value');
   });
 });
-
-export {};
