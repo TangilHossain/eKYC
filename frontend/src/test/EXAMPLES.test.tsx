@@ -4,7 +4,7 @@
  * This file demonstrates patterns for adding additional tests
  */
 
-import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
+import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
 
 // ============================================
 // EXAMPLE 1: Testing Admin Dashboard Component
@@ -339,6 +339,6 @@ describe("Example: Cleanup", () => {
 
   it("does something", () => {
     localStorage.setItem("key", "value");
-    expect(localStorage.getItem('key')).toBe('value');
+    expect(localStorage.getItem("key")).toBe("value");
   });
 });

@@ -46,8 +46,10 @@ describe("Form Component", () => {
 
   it("submits form successfully", async () => {
     const user = userEvent.setup();
-    const mockAlert = vi.spyOn(globalThis, 'alert').mockImplementation(() => {});
-    
+    const mockAlert = vi
+      .spyOn(globalThis, "alert")
+      .mockImplementation(() => {});
+
     mockFetch.mockResolvedValueOnce({
       ok: true,
       json: async () => ({ message: "Form saved successfully!" }),
@@ -65,10 +67,10 @@ describe("Form Component", () => {
 
     await waitFor(() => {
       expect(globalThis.fetch).toHaveBeenCalledWith(
-        'http://localhost:5001/api/forms',
+        "http://localhost:5001/api/forms",
         expect.objectContaining({
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
         })
       );
     });
@@ -80,9 +82,9 @@ describe("Form Component", () => {
     mockAlert.mockRestore();
   });
 
-  it('handles form submission error', async () => {
+  it("handles form submission error", async () => {
     const user = userEvent.setup();
-    
+
     mockFetch.mockResolvedValueOnce({
       ok: false,
       status: 500,
@@ -90,8 +92,8 @@ describe("Form Component", () => {
 
     render(<Form />);
 
-    await user.type(screen.getByPlaceholderText('Name'), 'John Doe');
-    await user.click(screen.getByRole('button', { name: /submit/i }));
+    await user.type(screen.getByPlaceholderText("Name"), "John Doe");
+    await user.click(screen.getByRole("button", { name: /submit/i }));
 
     await waitFor(() => {
       expect(globalThis.fetch).toHaveBeenCalled();
