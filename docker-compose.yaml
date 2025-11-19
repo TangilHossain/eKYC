@@ -63,7 +63,7 @@ services:
       MONGO_URI: mongodb://admin:qwerty@mongo:27017/ekyc?authSource=admin
       RABBITMQ_URL: amqp://rabbitmq
       PORT: 5001
-      OPENROUTER_API_KEY: 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
+      OPENROUTER_API_KEY: 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
       JWT_SECRET: supersecretkey123
       JWT_EXPIRES: 3600
     ports:
